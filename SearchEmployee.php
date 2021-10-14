@@ -1,3 +1,13 @@
+<?php
+    //Set variables for sticky form
+    session_start();
+    $keyword = $_POST['keyword'];
+
+    //Check if user is logged in
+    require('isLoggedIn.php');
+    checkedIfLoggedIn();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -5,8 +15,8 @@
         <title>Homepage</title>
     </head>
     <h1>Search First & Last Names From Database</h1>
-    <form id="searchEmployee" name="searchEmployee" method="post" action="SearchActor.php">
-        <p><label>Search <input type="text" name="keyword" id="keyword" /></label></p>
+    <form id="searchEmployee" name="searchEmployee" method="post" action="SearchEmployee.php">
+        <p><label>Search <input type="text" name="keyword" id="keyword" value='<?php echo $keyword ?>'/></label></p>
         <p><input type="submit" id="submit" value="Submit Query" /></p>
     </form>
     <body>

@@ -12,7 +12,7 @@
     $loginPwd = $_POST['loginPwd'];
 
     //Select any matches from the WebUsers table to authenticate user
-    $sql = "SELECT * FROM WebUsers WHERE user_name = '$loginUser' AND user_pwd = '$loginPwd'";
+    $sql = "SELECT * FROM WebUsers WHERE user_name = '$loginUser'";
 
     $result = mysqli_query($conn, $sql);
     if(!$result)
@@ -27,8 +27,14 @@
 
     if($count == 1)
     {
-        $_SESSION['LoggedInUser'] = $loginUser;
-        header('location:SearchEmployee.php');
+        $row = mysqli_fetch_assoc($result);
+        $hash = $row['user_pwd'];
+
+        if(password_verify($loginPwd, $hash))
+        {
+            $_SESSION['LoggedInUser'] = $loginUser;
+            header('location:SearchEmployee.php');
+        }
     }
     else
     {

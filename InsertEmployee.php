@@ -41,6 +41,7 @@
     //Check the fields for input
     if(isset($_POST['fName']) AND isset($_POST['lName']) AND isset($_POST['birthDate']) AND isset($_POST['gender']) AND isset($_POST['hireDate']))
     {
+        //Create SQL query
         $sql = "INSERT INTO employees (first_name,last_name,birth_date,gender,hire_date) VALUES ('";
         $sql .= $_POST['fName'];
         $sql .= "','";
@@ -53,8 +54,10 @@
         $sql .= $_POST['hireDate'];
         $sql .= "');";
 
+        //Execute query
         $result = mysqli_query($conn, $sql);
 
+        //Check if query executed successfully
         if(!$result)
         {
             die("Please check that all fields are filled out and in the correct format.");
@@ -62,9 +65,11 @@
         else
         {
             echo "Successfully inserted " . mysqli_affected_rows($conn) . " row(s) <br/>";
-            echo "<a href='SearchEmployee.php'>Back to Homepage</a>";
         }
 
     }
 
+    echo "<a href='SearchEmployee.php'>Back to Homepage</a>";
+
+    //Close DB connection
     mysqlI_close($conn);

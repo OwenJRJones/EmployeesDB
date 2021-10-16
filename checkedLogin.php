@@ -35,11 +35,13 @@
             $_SESSION['LoggedInUser'] = $loginUser;
             header('location:SearchEmployee.php');
         }
+
     }
     else
     {
         echo "Incorrect Login<br />";
         echo "<a href='mainLogin.html'>Try Again</a>";
     }
+
 
     ob_end_flush();

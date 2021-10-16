@@ -16,7 +16,7 @@
     </head>
     <h1>Search First & Last Names From Database</h1>
     <form id="searchEmployee" name="searchEmployee" method="post" action="SearchEmployee.php">
-        <p><label>Search <input type="text" name="keyword" id="keyword" value='<?php echo $keyword ?>'/></label></p>
+        <p><label>Search <input type="text" name="keyword" id="keyword" value="<?php echo $keyword ?>"/></label></p>
         <p><input type="submit" id="submit" value="Submit Query"/></p><p>Or</p>
     </form>
     <form id="AddNewEmployee" method="post" action="InsertEmployee.php">
@@ -41,14 +41,25 @@
 
         if(!$result)
         {
-            die("Could not retrieve records from the employees database: " . mysqli_connect_error());
+            die("Could not retrieve records from the employees database: " . mysqli_connect_error($conn));
         }
 
         echo "<table><tr><th>Emp. Number</th><th>Birth Date</th><th>First Name</th><th>Last Name</th><th>Gender</th><th>Hire Date</th></tr>";
 
-        while ($row = mysqli_fetch_assoc($result)) {
+        while ($row = mysqli_fetch_assoc($result))
+        {
+            $employeeId = $row['emp_no'];
+
             echo "<tr><td>" . $row["emp_no"] . "</td><td>" . $row["birth_date"] . "</td><td>" . $row["first_name"] . "</td><td>" .
-                 $row["last_name"] . "</td><td>" . $row["gender"] . "</td><td>" . $row["hire_date"] . "</td></tr>";
+                 $row["last_name"] . "</td><td>" . $row["gender"] . "</td><td>" . $row["hire_date"] . "</td><td>" .
+                "<form id='updateEmployee' name='updateEmployee' method='post' action='UpdateEmployee.php'>
+                    <input hidden type='text' id='employeeId' name='employeeId' value='$employeeId' />
+                    <input type='submit' id='submit' value='Edit'/>
+                 </form></td><td>" .
+                 "<form id='deleteEmployee' name='deleteEmployee' method='post' action='ConfirmDelete.php'>
+                    <input hidden type='text' id='employeeId' name='employeeId' value='$employeeId' />
+                    <input type='submit' id='submit' value='Delete'/>
+                  </form></td></tr>";
         }
     }
 
@@ -59,17 +70,29 @@
 
         if(!$result)
         {
-            die("Could not retrieve records from the employees database: " . mysqli_connect_error());
+            die("Could not retrieve records from the employees database: " . mysqli_connect_error($conn));
         }
 
         echo "<table><tr><th>Emp. Number</th><th>Birth Date</th><th>First Name</th><th>Last Name</th><th>Gender</th><th>Hire Date</th></tr>";
 
-        while ($row = mysqli_fetch_assoc($result)) {
+        while ($row = mysqli_fetch_assoc($result))
+        {
+            $employeeId = $row['emp_no'];
+
             echo "<tr><td>" . $row["emp_no"] . "</td><td>" . $row["birth_date"] . "</td><td>" . $row["first_name"] . "</td><td>" .
-                 $row["last_name"] . "</td><td>" . $row["gender"] . "</td><td>" . $row["hire_date"] . "</td></tr>";
+                 $row["last_name"] . "</td><td>" . $row["gender"] . "</td><td>" . $row["hire_date"] . "</td><td>" .
+                "<form id='updateEmployee' name='updateEmployee' method='post' action='UpdateEmployee.php'>
+                    <input hidden type='text' id='employeeId' name='employeeId' value='$employeeId' />
+                    <input type='submit' id='submit' value='Edit'/>
+                 </form></td><td>" .
+                "<form id='deleteEmployee' name='deleteEmployee' method='post' action='ConfirmDelete.php'>
+                    <input hidden type='text' id='employeeId' name='employeeId' value='$employeeId' />
+                    <input type='submit' id='submit' value='Delete'/>
+                  </form></td></tr>";
         }
     }
 
+    mysqli_close($conn);
 ?>
 
 
@@ -81,5 +104,3 @@
         border: 2px solid black;
     }
 </style>
-
-<?php mysqli_close($conn);?>

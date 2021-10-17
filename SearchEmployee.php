@@ -34,7 +34,7 @@
 
     $keyword = $_POST['keyword'];
 
-    //Code for keyword not set/load in page
+    //Code for if keyword IS NOT set/page first loads in
     if(!isset($_POST['keyword']))
     {
         $result = mysqli_query($conn, "SELECT * FROM employees ORDER BY emp_no DESC LIMIT 25");
@@ -63,7 +63,7 @@
         }
     }
 
-    //Code for if keyword is set
+    //Code for if keyword IS set
     if(isset($_POST['keyword'])) {
 
         $result = mysqli_query($conn, "SELECT * FROM employees WHERE first_name LIKE '$keyword%' OR last_name LIKE '$keyword%' ORDER BY emp_no DESC LIMIT 25");

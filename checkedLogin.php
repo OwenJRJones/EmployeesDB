@@ -15,6 +15,7 @@
     $sql = "SELECT * FROM WebUsers WHERE user_name = '$loginUser'";
 
     $result = mysqli_query($conn, $sql);
+
     if(!$result)
     {
         die("an error occurred in querying the database: " + mysqli_error($conn));

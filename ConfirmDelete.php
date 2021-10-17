@@ -27,6 +27,7 @@
                 $row["last_name"] . "</td><td>" . $row["gender"] . "</td><td>" . $row["hire_date"] . "</td></tr>";
         }
 
+        //Form to confirm deletion of record
         echo "<form id='confirmDelete' name='confirmDelete' method='post' action='DeleteEmployee.php'>
                 <p><input hidden type='text' id='idDelete' name='idDelete' value='$employeeId'/></p>
                 <p><input type='submit' id='confirm' name='confirm' value='Confirm'/><p>

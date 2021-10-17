@@ -12,6 +12,7 @@
 
     $employeeId = $_POST['idDelete'];
 
+    //Execute delete if ID field is filled out
     if(!empty($_POST['idDelete']))
     {
         $result = mysqli_query($conn, "DELETE FROM employees WHERE emp_no = '$employeeId';");

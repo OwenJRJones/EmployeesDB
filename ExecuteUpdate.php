@@ -12,6 +12,7 @@
 
     $employeeId = $_POST['employeeId'];
 
+    //Execute update if all fields are filled out
     if(!empty($_POST['fName']) && !empty($_POST['lName']) && !empty($_POST['birthDate']) && !empty($_POST['gender']) && !empty($_POST['hireDate']))
     {
         $sql = "UPDATE employees SET first_name = '";

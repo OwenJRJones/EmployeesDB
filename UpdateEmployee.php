@@ -12,6 +12,7 @@
 
     $employeeId = $_POST['employeeId'];
 
+    //Select employee record if ID field is filled out
     if(isset($_POST['employeeId'])) {
         $result = mysqli_query($conn, "SELECT * FROM employees WHERE emp_no = '$employeeId';");
 
@@ -19,6 +20,7 @@
             die("Could not retrieve record from employees database. " . mysqli_error($conn));
         }
 
+        //Gather post data to prefill form
         while ($row = mysqli_fetch_assoc($result)) {
             $fName = $row['first_name'];
             $lName = $row['last_name'];
